@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PasswordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,7 @@ use App\Http\Controllers\RegisterController;
 //Registration & Authentication
 Route::post('/signup', [RegisterController::class, "create"]);
 //Route::post('/login', [AuthController::class, "authenticate"]);
+
+//Password reset
+Route::post('forgot-password', [PasswordResetController::class, "sendPasswordResetLink"]);
+Route::post('reset-password', [PasswordResetController::class, "resetPassword"]);
