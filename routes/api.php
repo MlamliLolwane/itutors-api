@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\EmailVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,9 @@ Route::post('/signup', [RegisterController::class, "create"]);
 //Route::post('/login', [AuthController::class, "authenticate"]);
 
 //Password reset
-Route::post('forgot-password', [PasswordResetController::class, "sendPasswordResetLink"]);
-Route::post('reset-password', [PasswordResetController::class, "resetPassword"]);
+Route::post('/forgot-password', [PasswordResetController::class, "sendPasswordResetLink"]);
+Route::post('/reset-password', [PasswordResetController::class, "resetPassword"]);
+
+//Email verification
+Route::post('/send-verification-link', [EmailVerificationController::class, "resendEmailVerificationNotification"]);
+Route::post('/verify-email/{id}/{hash}', [EmailVerificationController::class, "verifyEmail"])->name('verification.verify');

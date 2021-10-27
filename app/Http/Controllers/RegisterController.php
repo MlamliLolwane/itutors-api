@@ -45,6 +45,8 @@ class RegisterController extends Controller
                     $user->assignRole('Learner');
             }
 
+            $user->sendEmailVerificationNotification();
+
             return $this->successResponse($user, Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             $user->delete();
