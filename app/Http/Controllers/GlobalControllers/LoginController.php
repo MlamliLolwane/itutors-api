@@ -30,4 +30,9 @@ class LoginController extends Controller
         return $this->failureResponse(["message" => "Invalid email address or password entered. Please try again."], 
         Response::HTTP_UNAUTHORIZED);
     }
+
+    public function logOff()
+    {
+        Auth::logout();
+    }
 }

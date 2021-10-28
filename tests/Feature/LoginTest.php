@@ -78,4 +78,35 @@ class LoginTest extends TestCase
 
         $this->assertAuthenticatedAs(Auth::user());
     }
+
+    public function test_user_can_logout()
+    {
+        $this->withoutExceptionHandling();
+        //Create role
+        Role::create(["name" => "Tutor"]);
+
+        //Create user
+        $user = User::factory()->create();
+        $user->assignRole('Tutor');
+
+        //Attempt to login with invalid email address
+        $this->json(
+            "POST",
+            "api/login",
+            ['email' => 'mrlolwane96@gmail.com', 'password' => 'Mlamli123'],
+            ['ACCEPT' => 'application/json']
+        );
+
+        Auth::attempt(['email' => 'mrlolwane96@gmail.com', 'password' => 'Mlamli123']);
+
+        $this->assertAuthenticatedAs(Auth::user());
+
+        $this->json(
+            "POST",
+            "api/logoff",
+            ['ACCEPT' => 'application/json']
+        );
+
+        $this->assertGuest();
+    }
 }

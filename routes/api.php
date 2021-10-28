@@ -29,6 +29,7 @@ use App\Http\Controllers\GlobalControllers\RegisterController;
 //Registration & Authentication
 Route::post('/signup', [RegisterController::class, "create"]);
 Route::post('/login', [LoginController::class, "authenticate"]);
+Route::post('/logoff', [LoginController::class, "logOff"]);
 
 //Password reset
 Route::post('/forgot-password', [PasswordResetController::class, "sendPasswordResetLink"]);
