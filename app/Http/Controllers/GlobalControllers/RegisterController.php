@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\GlobalControllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
 use App\Traits\StandardizedResponse;
 use Illuminate\Support\Facades\Hash;
 
