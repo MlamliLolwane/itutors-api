@@ -11,6 +11,11 @@ trait StandardizedResponse
         return response($data, $code)->header('Content-Type', 'application/json');
     }
 
+    public function failureResponse($data, $code)
+    {
+        return response($data, $code)->header('Content-Type', 'application/json');
+    }
+
     public function feedbackResponse($message, $code)
      {
          return response()->json(['message' => $message], $code);
