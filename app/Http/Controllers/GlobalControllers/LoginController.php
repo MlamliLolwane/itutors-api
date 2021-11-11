@@ -31,8 +31,9 @@ class LoginController extends Controller
         Response::HTTP_UNAUTHORIZED);
     }
 
-    public function logOff()
+    public function logoff()
     {
         Auth::logout();
+        //Auth::guard('web')->logout();
     }
 }
