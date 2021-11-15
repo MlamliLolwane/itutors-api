@@ -7,7 +7,7 @@ use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\Tutor\TutorProfileController;
 use App\Http\Controllers\GlobalControllers\LoginController;
 use App\Http\Controllers\GlobalControllers\RegisterController;
-
+use App\Http\Controllers\Tutor\TutorAdvertisementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +50,36 @@ Route::post('/verify-email/{id}/{hash}', [EmailVerificationController::class, "v
  */
 
 
+//Profile routes
+Route::middleware(['verified', 'auth:sanctum'])->group(function () {
+    Route::get('/tutor/profile/show', [TutorProfileController::class, "show"]);
+    Route::post('/tutor/profile/create', [TutorProfileController::class, "store"]);
+    Route::put('/tutor/profile/update', [TutorProfileController::class, "update"]);
+    Route::delete('/tutor/profile/delete', [TutorProfileController::class, "destroy"]);
+});
+
+//Advertisement routes
+Route::middleware(['verified', 'auth:sanctum'])->group(function () {
+    Route::get('/tutor/advertisement/show', [TutorAdvertisementController::class, "show"]);
+    Route::post('/tutor/advertisement/create', [TutorAdvertisementController::class, "store"]);
+    Route::put('/tutor/advertisement/update', [TutorAdvertisementController::class, "update"]);
+    Route::delete('/tutor/advertisement/delete', [TutorAdvertisementController::class, "destroy"]);
+});
+
+
+
+
+/**
+ * -------------------------------------------------------------------------
+ * Student Routes
+ * -------------------------------------------------------------------------
+ */
+
+
  //Profile routes
- Route::post('/tutor/profile/create', [TutorProfileController::class, "store"]);
- Route::put('/tutor/profile/update', [TutorProfileController::class, "update"]);
- Route::delete('/tutor/profile/delete', [TutorProfileController::class, "delete"]);
+Route::middleware(['verified', 'auth:sanctum'])->group(function () {
+    Route::get('/student/profile/show', [StudentProfileController::class, "show"]);
+    Route::post('/student/profile/create', [StudentProfileController::class, "store"]);
+    Route::put('/student/profile/update', [StudentProfileController::class, "update"]);
+    Route::delete('/student/profile/delete', [StudentProfileController::class, "destroy"]);
+});

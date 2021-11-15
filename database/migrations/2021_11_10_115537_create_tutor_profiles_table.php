@@ -24,6 +24,7 @@ class CreateTutorProfilesTable extends Migration
             $table->string('file_path')->nullable();
             $table->foreign('tutor_id')->references('id')->on('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
