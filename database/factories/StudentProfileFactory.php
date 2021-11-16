@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Student;
+use App\Models\StudentProfile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class StudentFactory extends Factory
+class StudentProfileFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Student::class;
+    protected $model = StudentProfile::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,11 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'student_id' => 1,
+            'first_name' => 'Mlamli',
+            'last_name' => 'Lolwane',
+            'study_level' => 'University',
+            'description' => 'Passionate about Software Development',
         ];
     }
 }

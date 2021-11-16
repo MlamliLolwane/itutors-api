@@ -118,6 +118,9 @@ class TutorProfileTest extends TestCase
             ],
             ['ACCEPT' => 'application/json']
         );
+
+        $response->assertJsonFragment(['job_title' => 'Software Developer']);
+
     }
 
     public function test_tutor_can_delete_profile()

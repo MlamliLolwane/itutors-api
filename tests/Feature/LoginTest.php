@@ -18,26 +18,6 @@ class LoginTest extends TestCase
      * @return void
      */
 
-    public function test_validation_errors()
-    {
-        // //Create role
-        Role::create(["name" => "Tutor"]);
-
-        //Create user
-        $user = User::factory()->create();
-        $user->assignRole('Tutor');
-
-        // $response = $this->json(
-        //     "POST",
-        //     "api/login",
-        //     ['ACCEPT' => 'application/json']
-        // );
-
-        $auth = Auth::attempt(['email' => 'mrlolwane9@gmail.com', 'password' => 'Mlamli123']);
-
-        $this->assertFalse($auth);
-    }
-
     public function test_user_cannot_login_with_invalid_credintials()
     {
         //Create role

@@ -23,10 +23,10 @@ class TutorProfileFactory extends Factory
     {
         return [
             'tutor_id' => '1',
-            'first_name' => 'Thabo',
-            'last_name' => 'Mbeki',
-            'job_title' => 'Software Developer',
-            'description' => 'Passionate software developer hailing all the way from Mafikeng',
+            'first_name' => 'Mlamli',
+            'last_name' => 'Lolwane',
+            'job_title' => 'Software Engineer',
+            'description' => "Developing software for a big firm",
             'file_name' => '',
             'file_path' => ''
         ];

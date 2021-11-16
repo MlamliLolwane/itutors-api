@@ -74,6 +74,9 @@ class TutorAdvertisementTest extends TestCase
         //Create tutor
         $this->create_user_and_profile();
 
+        //Create advertisement
+        TutorAdvertisement::factory()->create();
+        
         $response = $this->json(
             "PUT",
             "api/tutor/advertisement/update",
@@ -91,6 +94,9 @@ class TutorAdvertisementTest extends TestCase
         );
 
         //Assert record has been updated
+        $response->assertJsonFragment([
+            'price' => '300'
+        ]);
     }
 
     public function test_tutor_can_delete_profile()

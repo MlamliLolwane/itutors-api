@@ -5,9 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\Tutor\TutorProfileController;
+use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\GlobalControllers\LoginController;
-use App\Http\Controllers\GlobalControllers\RegisterController;
 use App\Http\Controllers\Tutor\TutorAdvertisementController;
+use App\Http\Controllers\GlobalControllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Student;
+use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class StudentPolicy
+class StudentProfilePolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class StudentPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Student  $student
+     * @param  \App\Models\StudentProfile  $studentProfile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Student $student)
+    public function view(User $user, StudentProfile $studentProfile)
     {
         //
     }
@@ -48,10 +48,10 @@ class StudentPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Student  $student
+     * @param  \App\Models\StudentProfile  $studentProfile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Student $student)
+    public function update(User $user, StudentProfile $studentProfile)
     {
         //
     }
@@ -60,10 +60,10 @@ class StudentPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Student  $student
+     * @param  \App\Models\StudentProfile  $studentProfile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Student $student)
+    public function delete(User $user, StudentProfile $studentProfile)
     {
         //
     }
@@ -72,10 +72,10 @@ class StudentPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Student  $student
+     * @param  \App\Models\StudentProfile  $studentProfile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Student $student)
+    public function restore(User $user, StudentProfile $studentProfile)
     {
         //
     }
@@ -84,10 +84,10 @@ class StudentPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Student  $student
+     * @param  \App\Models\StudentProfile  $studentProfile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Student $student)
+    public function forceDelete(User $user, StudentProfile $studentProfile)
     {
         //
     }
