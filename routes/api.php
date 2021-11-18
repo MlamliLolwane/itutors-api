@@ -9,6 +9,8 @@ use App\Http\Controllers\Student\StudentProfileController;
 use App\Http\Controllers\GlobalControllers\LoginController;
 use App\Http\Controllers\Tutor\TutorAdvertisementController;
 use App\Http\Controllers\GlobalControllers\RegisterController;
+use App\Http\Controllers\GlobalControllers\SchoolSubjectController;
+use App\Http\Controllers\GlobalControllers\UniversityModuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,18 @@ Route::post('/reset-password', [PasswordResetController::class, "resetPassword"]
 Route::post('/send-verification-link', [EmailVerificationController::class, "resendEmailVerificationNotification"]);
 Route::post('/verify-email/{id}/{hash}', [EmailVerificationController::class, "verifyEmail"])->name('verification.verify');
 
+//School Subjects 
+Route::get('/school_subject/show', [SchoolSubjectController::class, "show"]);
+Route::post('/school_subject/create', [SchoolSubjectController::class, "store"]);
+Route::put('/school_subject/update', [SchoolSubjectController::class, "update"]);
+Route::delete('/school_subject/delete', [SchoolSubjectController::class, "destroy"]);
+
+//University Modules
+Route::get('/university_module/show', [UniversityModuleController::class, "show"]);
+Route::post('/university_module/create', [UniversityModuleController::class, "store"]);
+Route::put('/university_module/update', [UniversityModuleController::class, "update"]);
+Route::delete('/university_module/delete', [UniversityModuleController::class, "destroy"]);
+
 
 
 
@@ -49,7 +63,6 @@ Route::post('/verify-email/{id}/{hash}', [EmailVerificationController::class, "v
  * Tutor Routes
  * -------------------------------------------------------------------------
  */
-
 
 //Profile routes
 Route::middleware(['verified', 'auth:sanctum'])->group(function () {
@@ -76,8 +89,7 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
  * -------------------------------------------------------------------------
  */
 
-
- //Profile routes
+//Profile routes
 Route::middleware(['verified', 'auth:sanctum'])->group(function () {
     Route::get('/student/profile/show', [StudentProfileController::class, "show"]);
     Route::post('/student/profile/create', [StudentProfileController::class, "store"]);
