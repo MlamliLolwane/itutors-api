@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\UniversityModule;
 use App\Http\Controllers\Controller;
+use App\Traits\StandardizedResponse;
 
 class UniversityModuleController extends Controller
 {
+    use StandardizedResponse;
     /**
      * Display a listing of the resource.
      *
@@ -41,6 +43,7 @@ class UniversityModuleController extends Controller
 
         try {
             $university_module = UniversityModule::create([
+                'module_code' => $request['module_code'],
                 'module_name' => $request['module_name'],
                 'university' => $request['university'],
             ]);
@@ -75,10 +78,10 @@ class UniversityModuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         try {
-            $university_module = UniversityModule::find($request["id"]);
+            $university_module = UniversityModule::find($request["module_code"]);
 
             $university_module->fill($request->all());
 
@@ -105,7 +108,7 @@ class UniversityModuleController extends Controller
      */
     public function destroy(Request $request)
     {
-        $university_module = UniversityModule::find($request['id']);
+        $university_module = UniversityModule::find($request['module_code']);
 
         $university_module->delete();
 

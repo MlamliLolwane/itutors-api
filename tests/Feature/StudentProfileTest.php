@@ -97,7 +97,7 @@ class StudentProfileTest extends TestCase
         //Signup and login student
         $this->initialize_student_details();
 
-        //Create profile for the tutor
+        //Create profile for the student
         $student_profile = StudentProfile::factory()->create();
 
         //Ensure that the tutor's profile is created
