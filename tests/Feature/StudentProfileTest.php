@@ -38,6 +38,25 @@ class StudentProfileTest extends TestCase
         ]);
     }
 
+    public function student_profile_can_be_retrieved_from_database()
+    {
+       //Signup and login student
+       $this->initialize_student_details();
+
+       //Create profile for the tutor
+       $student_profile = StudentProfile::factory()->create();
+
+        //Get all student profile from database
+        $response = $this->json(
+            "GET",
+            "api/student/profile/show",
+            ['student_id' => 1],
+            ['ACCEPT' => 'application/json']
+        );
+
+        $response->assertSee(['Mlamli', 'Lolwane']);
+    }
+
     public function test_student_can_create_profile()
     {
         //Signup and login student

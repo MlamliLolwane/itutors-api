@@ -53,23 +53,6 @@ class SchoolSubjectController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request)
-    {
-        try {
-            $school_subject = SchoolSubject::find($request["id"]);
-
-            return $this->successResponse($school_subject, Response::HTTP_OK);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

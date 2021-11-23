@@ -44,6 +44,45 @@ class TutorAdvertisementTest extends TestCase
         ]);
     }
 
+    public function test_all_the_tutors_advertisements_can_be_fetched_from_database()
+    {
+         //Create tutor
+         $this->create_user_and_profile();
+
+         //Create advertisements
+         TutorAdvertisement::factory()->create();
+         TutorAdvertisement::factory()->create(['subject_id' => 'PRT2000']);
+
+         //Get all tutor's advertisements from database
+        $response = $this->json(
+            "GET",
+            "api/tutor/advertisement/list",
+            ['tutor_id' => 1],
+            ['ACCEPT' => 'application/json']
+        );
+
+        $response->assertSee(['ONT1000', 'PRT2000']);
+    }
+
+    public function test_a_tutors_advertisement_can_be_fetched_from_database()
+    {
+         //Create tutor
+         $this->create_user_and_profile();
+
+         //Create advertisements
+         TutorAdvertisement::factory()->create();
+
+         //Get all tutor's advertisements from database
+        $response = $this->json(
+            "GET",
+            "api/tutor/advertisement/show",
+            ['tutor_id' => 1],
+            ['ACCEPT' => 'application/json']
+        );
+
+        $response->assertSee(['ONT1000']);
+    }
+
     public function test_tutor_can_create_advertisement()
     {
         //Create tutor

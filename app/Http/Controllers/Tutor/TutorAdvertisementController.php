@@ -18,7 +18,7 @@ class TutorAdvertisementController extends Controller
     public function list(Request $request)
     {
         try {
-            $tutor_advertisements = TutorAdvertisement::all()->where(['id' => $request['id']]);
+            $tutor_advertisements = TutorAdvertisement::where(['tutor_id' => $request['tutor_id']])->get();
 
             return $this->successResponse($tutor_advertisements, Response::HTTP_OK);
         } catch (\Throwable $th) {
@@ -64,10 +64,10 @@ class TutorAdvertisementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
         try {
-            $tutor_advertisement = TutorAdvertisement::find($id);
+            $tutor_advertisement = TutorAdvertisement::find($request['tutor_id']);
 
             return $this->successResponse($tutor_advertisement, Response::HTTP_OK);
         } catch (\Throwable $th) {

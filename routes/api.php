@@ -10,6 +10,7 @@ use App\Http\Controllers\GlobalControllers\LoginController;
 use App\Http\Controllers\Tutor\TutorAdvertisementController;
 use App\Http\Controllers\GlobalControllers\RegisterController;
 use App\Http\Controllers\GlobalControllers\SchoolSubjectController;
+use App\Http\Controllers\GlobalControllers\TutoringRequestController;
 use App\Http\Controllers\GlobalControllers\UniversityModuleController;
 
 /*
@@ -44,7 +45,7 @@ Route::post('/send-verification-link', [EmailVerificationController::class, "res
 Route::post('/verify-email/{id}/{hash}', [EmailVerificationController::class, "verifyEmail"])->name('verification.verify');
 
 //School Subjects 
-Route::get('/school_subject/show', [SchoolSubjectController::class, "show"]);
+Route::get('/school_subject/list', [SchoolSubjectController::class, "index"]);
 Route::post('/school_subject/create', [SchoolSubjectController::class, "store"]);
 Route::put('/school_subject/update', [SchoolSubjectController::class, "update"]);
 Route::delete('/school_subject/delete', [SchoolSubjectController::class, "destroy"]);
@@ -54,6 +55,15 @@ Route::get('/university_module/show', [UniversityModuleController::class, "show"
 Route::post('/university_module/create', [UniversityModuleController::class, "store"]);
 Route::put('/university_module/update', [UniversityModuleController::class, "update"]);
 Route::delete('/university_module/delete', [UniversityModuleController::class, "destroy"]);
+
+//University Modules
+Route::get('/tutoring_request/list', [TutoringRequestController::class, "list"]);
+Route::get('/tutoring_request/show', [TutoringRequestController::class, "show"]);
+Route::post('/tutoring_request/create', [TutoringRequestController::class, "store"]);
+Route::put('/tutoring_request/accept', [TutoringRequestController::class, "tutor_accept_request"]);
+Route::put('/tutoring_request/reject', [TutoringRequestController::class, "tutor_reject_request"]);
+Route::put('/tutoring_request/cancel', [TutoringRequestController::class, "student_cancel_request"]);
+Route::delete('/tutoring_request/delete', [TutoringRequestController::class, "destroy"]);
 
 
 
@@ -74,6 +84,7 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
 
 //Advertisement routes
 Route::middleware(['verified', 'auth:sanctum'])->group(function () {
+    Route::get('/tutor/advertisement/list', [TutorAdvertisementController::class, "list"]);
     Route::get('/tutor/advertisement/show', [TutorAdvertisementController::class, "show"]);
     Route::post('/tutor/advertisement/create', [TutorAdvertisementController::class, "store"]);
     Route::put('/tutor/advertisement/update', [TutorAdvertisementController::class, "update"]);

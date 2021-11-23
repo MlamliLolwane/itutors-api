@@ -23,7 +23,6 @@ class SchoolSubjectTest extends TestCase
         $this->initial_admin_details();
 
         //Attempt to create a subject
-        //Attempt to update tutor profile
         $response = $this->json(
             "POST",
             "api/school_subject/create",
@@ -35,6 +34,26 @@ class SchoolSubjectTest extends TestCase
             'grade'
         ]);
     }
+
+    public function test_all_subjects_can_be_retrieved_from_database()
+    {
+        $this->initial_admin_details();
+
+        //Create subjects
+        SchoolSubject::factory()->create();
+        SchoolSubject::factory()->create(['subject_name' => 'Life Science']);
+        $this->assertCount(2, SchoolSubject::all());
+
+        //Get all subjects from database
+        $response = $this->json(
+            "GET",
+            "api/school_subject/list",
+            ['ACCEPT' => 'application/json']
+        );
+
+        $response->assertSee(['Physical Science', 'Life Science']);
+    }
+
 
     public function test_admin_can_create_school_subject()
     {

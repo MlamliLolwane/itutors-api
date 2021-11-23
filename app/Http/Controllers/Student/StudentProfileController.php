@@ -47,9 +47,15 @@ class StudentProfileController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(StudentProfile $student)
+    public function show(Request $request)
     {
-        //
+        try {
+            $student_profile = StudentProfile::find($request["student_id"]);
+
+            return $this->successResponse($student_profile, Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
