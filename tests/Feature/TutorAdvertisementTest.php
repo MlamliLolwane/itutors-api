@@ -95,7 +95,7 @@ class TutorAdvertisementTest extends TestCase
                 'title' => '1st Year Software Development Tutorial',
                 'content' => 'I will give you a tutorial on whatever firs year software development topic
                 you are struggling with.',
-                'price' => '100',
+                'price' => 100,
                 'max_participants' => '2',
                 'duration' => '60 minutes',
                 'ad_type' => 'Reoccuring tutorials',
@@ -108,7 +108,7 @@ class TutorAdvertisementTest extends TestCase
         $this->assertCount(1, TutorAdvertisement::all());
     }
 
-    public function test_tutor_can_update_profile()
+    public function test_tutor_can_update_advertisement()
     {
         //Create tutor
         $this->create_user_and_profile();
@@ -122,7 +122,7 @@ class TutorAdvertisementTest extends TestCase
             [
                 'title' => "Test and Exam Preparation",
                 'content' => "I will help with your software development assignments and test preparation.",
-                'price' => "300",
+                'price' => 300,
                 'max_participants' => 1,
                 'duration' => "60",
                 'ad_type' => "Reoccuring",
@@ -134,7 +134,7 @@ class TutorAdvertisementTest extends TestCase
 
         //Assert record has been updated
         $response->assertJsonFragment([
-            'price' => '300'
+            'price' => 300
         ]);
     }
 

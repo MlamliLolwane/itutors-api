@@ -12,6 +12,8 @@ use App\Http\Controllers\GlobalControllers\RegisterController;
 use App\Http\Controllers\GlobalControllers\SchoolSubjectController;
 use App\Http\Controllers\GlobalControllers\TutoringRequestController;
 use App\Http\Controllers\GlobalControllers\UniversityModuleController;
+use App\Http\Controllers\Student\StudentQueries;
+use App\Http\Controllers\Student\StudentQueriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,3 +109,10 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
     Route::put('/student/profile/update', [StudentProfileController::class, "update"]);
     Route::delete('/student/profile/delete', [StudentProfileController::class, "destroy"]);
 });
+
+//Queries
+Route::get('/query/tutor_advertisement', [StudentQueriesController::class, "find_tutor"]);
+
+// Route::middleware(['verified', 'auth:sanctum'])->group(function () {
+    
+// });

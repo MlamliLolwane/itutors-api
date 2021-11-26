@@ -36,7 +36,7 @@ class TutorAdvertisementController extends Controller
         $request->validate([
             'title' => 'required|string',
             'content' => 'required|string',
-            'price' => 'required|string',
+            'price' => 'required|integer',
             'max_participants' => 'required|integer',
             'duration' => 'required|string',
             'ad_type' => 'required|string',

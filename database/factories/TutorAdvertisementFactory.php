@@ -24,7 +24,7 @@ class TutorAdvertisementFactory extends Factory
         return [
             'title' => "Test and Exam Preparation",
             'content' => "I will help with your software development assignments and test preparation.",
-            'price' => "200",
+            'price' => 200,
             'max_participants' => 1,
             'duration' => "60",
             'ad_type' => "Reoccuring",

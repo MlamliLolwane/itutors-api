@@ -17,7 +17,7 @@ class CreateTutorAdvertisementsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('content');
-            $table->string('price');
+            $table->double('price');
             $table->integer('max_participants')->default(1);
             $table->string('duration')->nullable();
             $table->string('ad_type');//Once off or reoccuring
