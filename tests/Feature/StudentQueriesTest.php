@@ -30,16 +30,6 @@ class StudentQueriesTest extends TestCase
             'subject_id' => 'ONT2000'
         ]);
 
-
-        //Get all tutor's advertisements from database
-    //    $response = $this->json(
-    //        "GET",
-    //        "api/tutor/advertisement/show",
-    //        ['tutor_id' => 1],
-    //        ['ACCEPT' => 'application/json']
-    //    );
-
-       //$response->assertSee(['ONT1000']);
         $response = $this->json(
             "GET",
             "api/query/tutor_advertisement",
@@ -47,7 +37,7 @@ class StudentQueriesTest extends TestCase
             ['ACCEPT' => 'application/json']
         );
 
-        dd($response);
+        
     }
 
     public function create_user_and_profile()

@@ -67,7 +67,7 @@ class TutorAdvertisementController extends Controller
     public function show(Request $request)
     {
         try {
-            $tutor_advertisement = TutorAdvertisement::find($request['tutor_id']);
+            $tutor_advertisement = TutorAdvertisement::find($request['id']);
 
             return $this->successResponse($tutor_advertisement, Response::HTTP_OK);
         } catch (\Throwable $th) {

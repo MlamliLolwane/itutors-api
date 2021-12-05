@@ -76,11 +76,21 @@ class TutorAdvertisementTest extends TestCase
         $response = $this->json(
             "GET",
             "api/tutor/advertisement/show",
-            ['tutor_id' => 1],
+            ['id' => 1],
             ['ACCEPT' => 'application/json']
         );
 
-        $response->assertSee(['ONT1000']);
+        $response->assertSee([
+            "id" => 1,
+            "title" => "Test and Exam Preparation",
+            "content" => "I will help with your software development assignments and test preparation.",
+            "price" => "200.0",
+            "max_participants" => 1,
+            "duration" => "60",
+            "ad_type" => "Reoccuring",
+            "tutor_id" => 1,
+            "subject_id" => "ONT1000"
+            ]);
     }
 
     public function test_tutor_can_create_advertisement()
@@ -138,7 +148,7 @@ class TutorAdvertisementTest extends TestCase
         ]);
     }
 
-    public function test_tutor_can_delete_profile()
+    public function test_tutor_can_delete_advertisement()
     {
         //Create tutor
         $this->create_user_and_profile();

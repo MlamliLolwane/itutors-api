@@ -46,10 +46,10 @@ class TutorProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
         try {
-            $profile = TutorProfile::find($id);
+            $profile = TutorProfile::find($request['tutor_id']);
 
             return $this->successResponse($profile, Response::HTTP_OK);
         } catch (\Throwable $th) {

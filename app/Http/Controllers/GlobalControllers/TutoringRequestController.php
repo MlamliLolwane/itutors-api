@@ -148,12 +148,12 @@ class TutoringRequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
-    {
-        $tutoring_request = TutoringRequest::find($request['id']);
+    // public function destroy(Request $request)
+    // {
+    //     $tutoring_request = TutoringRequest::find($request['id']);
 
-        $tutoring_request->delete();
+    //     $tutoring_request->delete();
 
-        return $this->successResponse("School subject deleted successfully", Response::HTTP_OK);
-    }
+    //     return $this->successResponse("School subject deleted successfully", Response::HTTP_OK);
+    // }
 }

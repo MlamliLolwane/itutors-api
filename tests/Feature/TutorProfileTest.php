@@ -52,6 +52,48 @@ class TutorProfileTest extends TestCase
         ]);
     }
 
+    public function test_tutor_can_view_profile()
+    {
+        //Create role
+        Role::create(["name" => "Tutor"]);
+
+        //Create user
+        $user = User::factory()->create();
+        $user->assignRole('Tutor');
+
+        //Login user 
+        Auth::attempt(['email' => 'mrlolwane96@gmail.com', 'password' => 'Mlamli123']);
+
+        $this->assertAuthenticatedAs(Auth::user());
+
+        //Create profile for the tutor
+        $tutor_profile = TutorProfile::factory()->create();
+
+        //Ensure that the tutor's profile is created
+        $this->assertCount(1, TutorProfile::all());
+
+        //View tutor's profile
+        $response = $this->json(
+            "GET",
+            "api/tutor/profile/show",
+            [
+                "tutor_id" => 1,
+            ],
+            ['ACCEPT' => 'application/json']
+        );
+
+        $response->assertSee([
+            "tutor_id" => "1",
+            "first_name" => "Mlamli",
+            "last_name" => "Lolwane",
+            "job_title" => "Software Engineer",
+            "description" => "Developing software for a big firm",
+            "file_name" => "",
+            "file_path" => "",
+            "deleted_at" => null,
+        ]);
+    }
+
     public function test_tutor_can_create_profile()
     {
         //Create role
@@ -120,7 +162,6 @@ class TutorProfileTest extends TestCase
         );
 
         $response->assertJsonFragment(['job_title' => 'Software Developer']);
-
     }
 
     public function test_tutor_can_delete_profile()

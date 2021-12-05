@@ -58,14 +58,9 @@ Route::post('/university_module/create', [UniversityModuleController::class, "st
 Route::put('/university_module/update', [UniversityModuleController::class, "update"]);
 Route::delete('/university_module/delete', [UniversityModuleController::class, "destroy"]);
 
-//University Modules
-Route::get('/tutoring_request/list', [TutoringRequestController::class, "list"]);
+//Tutoring requests
 Route::get('/tutoring_request/show', [TutoringRequestController::class, "show"]);
-Route::post('/tutoring_request/create', [TutoringRequestController::class, "store"]);
-Route::put('/tutoring_request/accept', [TutoringRequestController::class, "tutor_accept_request"]);
-Route::put('/tutoring_request/reject', [TutoringRequestController::class, "tutor_reject_request"]);
-Route::put('/tutoring_request/cancel', [TutoringRequestController::class, "student_cancel_request"]);
-Route::delete('/tutoring_request/delete', [TutoringRequestController::class, "destroy"]);
+//Route::delete('/tutoring_request/delete', [TutoringRequestController::class, "destroy"]);
 
 
 
@@ -77,20 +72,23 @@ Route::delete('/tutoring_request/delete', [TutoringRequestController::class, "de
  */
 
 //Profile routes
-Route::middleware(['verified', 'auth:sanctum'])->group(function () {
+Route::middleware(['verified', 'auth:sanctum', 'role:Tutor'])->group(function () {
     Route::get('/tutor/profile/show', [TutorProfileController::class, "show"]);
     Route::post('/tutor/profile/create', [TutorProfileController::class, "store"]);
     Route::put('/tutor/profile/update', [TutorProfileController::class, "update"]);
     Route::delete('/tutor/profile/delete', [TutorProfileController::class, "destroy"]);
-});
 
-//Advertisement routes
-Route::middleware(['verified', 'auth:sanctum'])->group(function () {
+    //Advertisement routes
     Route::get('/tutor/advertisement/list', [TutorAdvertisementController::class, "list"]);
     Route::get('/tutor/advertisement/show', [TutorAdvertisementController::class, "show"]);
     Route::post('/tutor/advertisement/create', [TutorAdvertisementController::class, "store"]);
     Route::put('/tutor/advertisement/update', [TutorAdvertisementController::class, "update"]);
     Route::delete('/tutor/advertisement/delete', [TutorAdvertisementController::class, "destroy"]);
+
+    //Tutoring Requests
+    Route::get('/tutoring_request/list', [TutoringRequestController::class, "list"]);
+    Route::put('/tutoring_request/accept', [TutoringRequestController::class, "tutor_accept_request"]);
+    Route::put('/tutoring_request/reject', [TutoringRequestController::class, "tutor_reject_request"]);
 });
 
 
@@ -102,12 +100,16 @@ Route::middleware(['verified', 'auth:sanctum'])->group(function () {
  * -------------------------------------------------------------------------
  */
 
-//Profile routes
-Route::middleware(['verified', 'auth:sanctum'])->group(function () {
+Route::middleware(['verified', 'auth:sanctum', 'role:Student'])->group(function () {
+    //Profile routes
     Route::get('/student/profile/show', [StudentProfileController::class, "show"]);
     Route::post('/student/profile/create', [StudentProfileController::class, "store"]);
     Route::put('/student/profile/update', [StudentProfileController::class, "update"]);
     Route::delete('/student/profile/delete', [StudentProfileController::class, "destroy"]);
+
+    //Tutoring Requests routes
+    Route::post('/tutoring_request/create', [TutoringRequestController::class, "store"]);
+    Route::put('/tutoring_request/cancel', [TutoringRequestController::class, "student_cancel_request"]);
 });
 
 //Queries

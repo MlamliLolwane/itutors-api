@@ -20,7 +20,8 @@ class TutoringRequestTest extends TestCase
 
     public function test_validation_errors()
     {
-        $this->initial_users_details();
+        $this->tutor_details();
+        $this->student_details();
 
         $response = $this->json(
             "POST",
@@ -39,7 +40,8 @@ class TutoringRequestTest extends TestCase
 
     public function test_all_the_tutors_advertisements_can_be_fetched_from_database()
     {
-        $this->initial_users_details();
+        $this->tutor_details();
+        $this->student_details();
 
         //Create another advertisement 
         TutorAdvertisement::factory()->create(['price' => '300']);
@@ -66,7 +68,8 @@ class TutoringRequestTest extends TestCase
 
     public function test_student_can_request_a_tutorial()
     {
-        $this->initial_users_details();
+        $this->tutor_details();
+        $this->student_details();
 
         $response = $this->json(
             "POST",
@@ -88,7 +91,8 @@ class TutoringRequestTest extends TestCase
 
     public function test_student_can_cancel_tutoring_request()
     {
-        $this->initial_users_details();
+        $this->tutor_details();
+        $this->student_details();
 
         //Create a tutoring request
         TutoringRequest::factory()->create();
@@ -109,7 +113,13 @@ class TutoringRequestTest extends TestCase
 
     public function test_tutor_can_reject_tutoring_request()
     {
-        $this->initial_users_details();
+        $this->withoutExceptionHandling();
+        $this->tutor_details();
+        $this->student_details();
+        
+        //Logout student and login tutor
+        Auth::logout();
+        Auth::attempt(['email' => 'mrlolwane96@gmail.com', 'password' => 'Mlamli123']);
 
         //Create a tutoring request
         TutoringRequest::factory()->create();
@@ -130,7 +140,12 @@ class TutoringRequestTest extends TestCase
 
     public function test_tutor_can_accept_tutoring_request()
     {
-        $this->initial_users_details();
+        $this->tutor_details();
+        $this->student_details();
+
+        //Logout student and login tutor
+        Auth::logout();
+        Auth::attempt(['email' => 'mrlolwane96@gmail.com', 'password' => 'Mlamli123']);
 
         //Create a tutoring request
         TutoringRequest::factory()->create();
@@ -149,7 +164,7 @@ class TutoringRequestTest extends TestCase
         $this->assertEquals($response['request_status'], 'Accepted');
     }
 
-    public function initial_users_details()
+    public function tutor_details()
     {
         //Create role
         Role::create(["name" => "Tutor"]);
@@ -168,10 +183,10 @@ class TutoringRequestTest extends TestCase
 
         //Create Advertisement
         TutorAdvertisement::factory()->create();
+    }
 
-        //Logout tutor
-        Auth::logout();
-
+    public function student_details()
+    {
         //Create Student
         $student = User::factory()->create(['email' => 'mrlolwane1@gmail.com']);
         $student->assignRole('Student');
@@ -182,7 +197,5 @@ class TutoringRequestTest extends TestCase
 
         //Create Student Profile
         StudentProfile::factory()->create(['student_id' => 2]);
-
-        //dd($ad);
     }
 }
