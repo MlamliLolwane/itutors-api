@@ -16,12 +16,25 @@ class TutoringRequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function list(Request $request)
+    public function turor_list_tutoring_requests(Request $request)
     {
         //Get all tutoring requets for the tutor
         
         try {
             $tutoring_requests = TutoringRequest::where('tutor_id', $request["tutor_id"])->get();
+
+            return $this->successResponse($tutoring_requests, Response::HTTP_OK);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function student_list_tutoring_requests(Request $request)
+    {
+        //Get all tutoring requets for the tutor
+        
+        try {
+            $tutoring_requests = TutoringRequest::where('student_id', $request["student_id"])->get();
 
             return $this->successResponse($tutoring_requests, Response::HTTP_OK);
         } catch (\Throwable $th) {

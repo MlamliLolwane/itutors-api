@@ -29,7 +29,6 @@ class PasswordResetController extends Controller
         // throw ValidationException::withMessages([
         //     'email' => [trans($status)]
         // ]);
-        return "Hello world";
     }
 
     public function resetPassword(Request $request)

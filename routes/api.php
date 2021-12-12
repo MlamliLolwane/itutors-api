@@ -86,7 +86,7 @@ Route::middleware(['verified', 'auth:sanctum', 'role:Tutor'])->group(function ()
     Route::delete('/tutor/advertisement/delete', [TutorAdvertisementController::class, "destroy"]);
 
     //Tutoring Requests
-    Route::get('/tutoring_request/list', [TutoringRequestController::class, "list"]);
+    Route::get('/tutoring_request/list', [TutoringRequestController::class, "turor_list_tutoring_requests"]);
     Route::put('/tutoring_request/accept', [TutoringRequestController::class, "tutor_accept_request"]);
     Route::put('/tutoring_request/reject', [TutoringRequestController::class, "tutor_reject_request"]);
 });
@@ -108,6 +108,7 @@ Route::middleware(['verified', 'auth:sanctum', 'role:Student'])->group(function 
     Route::delete('/student/profile/delete', [StudentProfileController::class, "destroy"]);
 
     //Tutoring Requests routes
+    Route::get('/tutoring_request/list_student_tutoring_request', [TutoringRequestController::class, "student_list_tutoring_requests"]);
     Route::post('/tutoring_request/create', [TutoringRequestController::class, "store"]);
     Route::put('/tutoring_request/cancel', [TutoringRequestController::class, "student_cancel_request"]);
 });
