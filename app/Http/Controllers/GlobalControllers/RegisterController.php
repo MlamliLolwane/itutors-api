@@ -47,7 +47,7 @@ class RegisterController extends Controller
 
             //$user->sendEmailVerificationNotification();
 
-            return $this->successResponse($user, Response::HTTP_CREATED);
+            return $this->successResponse(['message' => 'User created successfully'], Response::HTTP_CREATED);
         } catch (\Throwable $th) {
             $user->delete();
             throw $th;

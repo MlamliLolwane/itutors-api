@@ -27,10 +27,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             switch (Auth::user()->roles->pluck('name')[0]) {
                 case 'Tutor':
-                    $user = User::with('TutorProfile')->get();
+                    $user = User::with('TutorProfile')->find(Auth::id());
                     break;
                 case 'Student':
-                    $user = User::with('StudentProfile')->get();
+                    $user = User::with('StudentProfile')->find(Auth::id());
                     break;
                 default:
                     return $this->failureResponse(
