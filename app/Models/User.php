@@ -51,4 +51,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
         $this->notify(new ResetPasswordNotification($url));
     }
+
+    public function studentProfile()
+    {
+        return $this->hasOne(StudentProfile::class, 'student_id');
+    }
+
+    public function tutorProfile()
+    {
+        return $this->hasOne(TutorProfile::class, 'tutor_id');
+    }
 }

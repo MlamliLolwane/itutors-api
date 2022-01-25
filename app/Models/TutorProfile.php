@@ -22,4 +22,9 @@ class TutorProfile extends Model
         'file_name',
         'file_path'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id');
+    }
 }

@@ -35,7 +35,7 @@ use App\Http\Controllers\Student\StudentQueriesController;
 
 //Registration & Authentication
 Route::post('/signup', [RegisterController::class, "create"]);
-Route::post('/login', [LoginController::class, "authenticate"])->middleware(['verified']);
+Route::post('/login', [LoginController::class, "authenticate"]);
 Route::post('/logoff', [LoginController::class, "logoff"])->middleware(['auth:sanctum', 'verified']);
 
 //Password reset
@@ -72,7 +72,8 @@ Route::get('/tutoring_request/show', [TutoringRequestController::class, "show"])
  */
 
 //Profile routes
-Route::middleware(['verified', 'auth:sanctum', 'role:Tutor'])->group(function () {
+//Should remember to add 'verified' middleware
+Route::middleware(['auth:sanctum', 'role:Tutor'])->group(function () {
     Route::get('/tutor/profile/show', [TutorProfileController::class, "show"]);
     Route::post('/tutor/profile/create', [TutorProfileController::class, "store"]);
     Route::put('/tutor/profile/update', [TutorProfileController::class, "update"]);
@@ -100,7 +101,8 @@ Route::middleware(['verified', 'auth:sanctum', 'role:Tutor'])->group(function ()
  * -------------------------------------------------------------------------
  */
 
-Route::middleware(['verified', 'auth:sanctum', 'role:Student'])->group(function () {
+ //Should remember to add 'verified' middleware
+Route::middleware(['auth:sanctum', 'role:Student'])->group(function () {
     //Profile routes
     Route::get('/student/profile/show', [StudentProfileController::class, "show"]);
     Route::post('/student/profile/create', [StudentProfileController::class, "store"]);

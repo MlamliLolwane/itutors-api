@@ -42,10 +42,10 @@ class RegisterController extends Controller
                     break;
 
                 default:
-                    $user->assignRole('Learner');
+                    $user->assignRole('Student');
             }
 
-            $user->sendEmailVerificationNotification();
+            //$user->sendEmailVerificationNotification();
 
             return $this->successResponse($user, Response::HTTP_CREATED);
         } catch (\Throwable $th) {

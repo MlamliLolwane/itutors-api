@@ -18,6 +18,7 @@ class TutorAdvertisementController extends Controller
     public function list(Request $request)
     {
         try {
+            //Should also get deleted advertisements to show the tutor analytics of those advertisements too
             $tutor_advertisements = TutorAdvertisement::where(['tutor_id' => $request['tutor_id']])->get();
 
             return $this->successResponse($tutor_advertisements, Response::HTTP_OK);
@@ -82,27 +83,33 @@ class TutorAdvertisementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        $tutor_advertisement = TutorAdvertisement::find($request["id"]);
+    /**
+     * Update advertisement is not really recommended because we can just take the data from the 
+     * frontend to create a new advertisement. Also updating the tutor's advertisement directly
+     * will mess up the integrity of the data.
+     */
 
-        $tutor_advertisement->fill($request->all());
+    // public function update(Request $request)
+    // {
+    //     $tutor_advertisement = TutorAdvertisement::find($request["id"]);
 
-        if ($tutor_advertisement->isClean()) {
-            return $this->failureResponse('No changes made because no value was supplied', Response::HTTP_NOT_MODIFIED);
-        }
+    //     $tutor_advertisement->fill($request->all());
 
-        try {
-            $tutor_advertisement->save();
+    //     if ($tutor_advertisement->isClean()) {
+    //         return $this->failureResponse('No changes made because no value was supplied', Response::HTTP_NOT_MODIFIED);
+    //     }
 
-            return $this->successResponse($tutor_advertisement, Response::HTTP_OK);
-        } catch (\Throwable $th) {
-            return $this->failureResponse(
-                "An error occured and your request couldn't be processed",
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
-    }
+    //     try {
+    //         $tutor_advertisement->save();
+
+    //         return $this->successResponse($tutor_advertisement, Response::HTTP_OK);
+    //     } catch (\Throwable $th) {
+    //         return $this->failureResponse(
+    //             "An error occured and your request couldn't be processed",
+    //             Response::HTTP_INTERNAL_SERVER_ERROR
+    //         );
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.
