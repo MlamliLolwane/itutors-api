@@ -27,7 +27,6 @@ class TutorAdvertisementFactory extends Factory
             'price' => 200,
             'max_participants' => 1,
             'duration' => "60",
-            'ad_type' => "Reoccuring",
             'tutor_id' => 1,
             'subject_id' => "ONT1000",
         ];

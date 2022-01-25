@@ -40,7 +40,6 @@ class TutorAdvertisementController extends Controller
             'price' => 'required|integer',
             'max_participants' => 'required|integer',
             'duration' => 'required|string',
-            'ad_type' => 'required|string',
             'tutor_id' => 'required|integer',
             'subject_id' => 'required|string',
         ]);
@@ -51,7 +50,6 @@ class TutorAdvertisementController extends Controller
             'price' => $request['price'],
             'max_participants' => $request['max_participants'],
             'duration' => $request['duration'],
-            'ad_type' => $request['ad_type'],
             'tutor_id' => $request['tutor_id'],
             'subject_id' => $request['subject_id']
         ]);

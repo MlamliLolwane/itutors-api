@@ -16,7 +16,6 @@ class TutorAdvertisement extends Model
         'price',
         'max_participants',
         'duration',
-        'ad_type',
         'tutor_id',
         'subject_id'
     ];
