@@ -83,9 +83,9 @@ class TutorAdvertisementTest extends TestCase
             "id" => 1,
             "title" => "Test and Exam Preparation",
             "content" => "I will help with your software development assignments and test preparation.",
-            "price" => "200.0",
+            "price" => 200,
             "max_participants" => 1,
-            "duration" => "60",
+            "duration" => 60,
             "tutor_id" => 1,
             "subject_id" => "ONT1000"
             ]);
@@ -93,6 +93,7 @@ class TutorAdvertisementTest extends TestCase
 
     public function test_tutor_can_create_advertisement()
     {
+        $this->withoutExceptionHandling();
         //Create tutor
         $this->create_user_and_profile();
 
@@ -105,8 +106,8 @@ class TutorAdvertisementTest extends TestCase
                 you are struggling with.',
                 'price' => 100,
                 'max_participants' => '2',
-                'duration' => '60 minutes',
-                'tutor_id' => '1',
+                'duration' => 60,
+                'tutor_id' => 1,
                 'subject_id' => 'ONT1000'
             ],
             ['ACCEPT' => 'application/json']

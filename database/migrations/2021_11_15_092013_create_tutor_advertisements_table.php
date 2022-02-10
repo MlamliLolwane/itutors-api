@@ -17,9 +17,9 @@ class CreateTutorAdvertisementsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('content');
-            $table->double('price');
+            $table->integer('price');
             $table->integer('max_participants')->default(1);
-            $table->string('duration')->nullable();
+            $table->integer('duration');
             $table->unsignedBigInteger('tutor_id');
             $table->string('subject_id');
             $table->foreign('tutor_id')->references('tutor_id')->on("tutor_profiles");

@@ -36,7 +36,7 @@ use App\Http\Controllers\Student\StudentQueriesController;
 //Registration & Authentication
 Route::post('/signup', [RegisterController::class, "create"]);
 Route::post('/login', [LoginController::class, "authenticate"]);
-Route::post('/logoff', [LoginController::class, "logoff"])->middleware(['auth:sanctum', 'verified']);
+Route::post('/logoff', [LoginController::class, "logoff"])->middleware(['auth:sanctum']);
 
 //Password reset
 Route::post('/forgot-password', [PasswordResetController::class, "sendPasswordResetLink"])->middleware(['verified']);;

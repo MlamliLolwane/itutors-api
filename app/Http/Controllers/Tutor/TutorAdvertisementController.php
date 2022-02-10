@@ -39,7 +39,7 @@ class TutorAdvertisementController extends Controller
             'content' => 'required|string',
             'price' => 'required|integer',
             'max_participants' => 'required|integer',
-            'duration' => 'required|string',
+            'duration' => 'required|integer',
             'tutor_id' => 'required|integer',
             'subject_id' => 'required|string',
         ]);
