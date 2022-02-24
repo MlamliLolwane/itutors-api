@@ -14,6 +14,7 @@ use App\Http\Controllers\GlobalControllers\TutoringRequestController;
 use App\Http\Controllers\GlobalControllers\UniversityModuleController;
 use App\Http\Controllers\Student\StudentQueries;
 use App\Http\Controllers\Student\StudentQueriesController;
+use App\Http\Controllers\Tutor\TutorScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,13 +75,13 @@ Route::get('/tutoring_request/show', [TutoringRequestController::class, "show"])
 //Profile routes
 //Should remember to add 'verified' middleware
 Route::middleware(['auth:sanctum', 'role:Tutor'])->group(function () {
-    Route::get('/tutor/profile/show', [TutorProfileController::class, "show"]);
+    Route::get('/tutor/profile/show/{tutor_id}', [TutorProfileController::class, "show"]);
     Route::post('/tutor/profile/create', [TutorProfileController::class, "store"]);
     Route::put('/tutor/profile/update', [TutorProfileController::class, "update"]);
     Route::delete('/tutor/profile/delete', [TutorProfileController::class, "destroy"]);
 
-    //Advertisement routes
-    Route::get('/tutor/advertisement/list', [TutorAdvertisementController::class, "list"]);
+    //Advertisement Routes
+    Route::get('/tutor/advertisement/list/{tutor_id}', [TutorAdvertisementController::class, "list"]);
     Route::get('/tutor/advertisement/show', [TutorAdvertisementController::class, "show"]);
     Route::post('/tutor/advertisement/create', [TutorAdvertisementController::class, "store"]);
     Route::put('/tutor/advertisement/update', [TutorAdvertisementController::class, "update"]);
@@ -90,6 +91,12 @@ Route::middleware(['auth:sanctum', 'role:Tutor'])->group(function () {
     Route::get('/tutoring_request/list', [TutoringRequestController::class, "turor_list_tutoring_requests"]);
     Route::put('/tutoring_request/accept', [TutoringRequestController::class, "tutor_accept_request"]);
     Route::put('/tutoring_request/reject', [TutoringRequestController::class, "tutor_reject_request"]);
+
+    //Tutor Schedule Routes
+    Route::get('/tutor/schedule/list', [TutorScheduleController::class, "index"]);
+    Route::post('/tutor/schedule/create', [TutorScheduleController::class, "store"]);
+    Route::put('/tutor/schedule/update', [TutorScheduleController::class, 'update']);
+    Route::delete('/tutor/schedule/delete', [TutorScheduleController::class, 'destroy']);
 });
 
 

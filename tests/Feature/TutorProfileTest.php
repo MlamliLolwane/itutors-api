@@ -54,6 +54,7 @@ class TutorProfileTest extends TestCase
 
     public function test_tutor_can_view_profile()
     {
+        $this->withoutExceptionHandling();
         //Create role
         Role::create(["name" => "Tutor"]);
 
@@ -72,13 +73,12 @@ class TutorProfileTest extends TestCase
         //Ensure that the tutor's profile is created
         $this->assertCount(1, TutorProfile::all());
 
+        //dd($tutor_profile);
+
         //View tutor's profile
         $response = $this->json(
             "GET",
-            "api/tutor/profile/show",
-            [
-                "tutor_id" => 1,
-            ],
+            "api/tutor/profile/show/1",
             ['ACCEPT' => 'application/json']
         );
 

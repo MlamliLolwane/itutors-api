@@ -43,13 +43,13 @@ class TutorProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $tutor_id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($tutor_id)
     {
         try {
-            $profile = TutorProfile::find($request['tutor_id']);
+            $profile = TutorProfile::find($tutor_id);
 
             return $this->successResponse($profile, Response::HTTP_OK);
         } catch (\Throwable $th) {

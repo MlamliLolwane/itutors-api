@@ -55,8 +55,7 @@ class TutorAdvertisementTest extends TestCase
          //Get all tutor's advertisements from database
         $response = $this->json(
             "GET",
-            "api/tutor/advertisement/list",
-            ['tutor_id' => 1],
+            "api/tutor/advertisement/list/1",
             ['ACCEPT' => 'application/json']
         );
 

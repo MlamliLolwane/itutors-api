@@ -15,11 +15,11 @@ class TutorAdvertisementController extends Controller
     /**
      * List of all the tutor's advertisements
      */
-    public function list(Request $request)
+    public function list($tutor_id)
     {
         try {
             //Should also get deleted advertisements to show the tutor analytics of those advertisements too
-            $tutor_advertisements = TutorAdvertisement::where(['tutor_id' => $request['tutor_id']])->get();
+            $tutor_advertisements = TutorAdvertisement::where(['tutor_id' => $tutor_id])->get();
 
             return $this->successResponse($tutor_advertisements, Response::HTTP_OK);
         } catch (\Throwable $th) {
