@@ -93,7 +93,7 @@ Route::middleware(['auth:sanctum', 'role:Tutor'])->group(function () {
     Route::put('/tutoring_request/reject', [TutoringRequestController::class, "tutor_reject_request"]);
 
     //Tutor Schedule Routes
-    Route::get('/tutor/schedule/list', [TutorScheduleController::class, "index"]);
+    Route::get('/tutor/schedule/list/{tutor_id}', [TutorScheduleController::class, "index"]);
     Route::post('/tutor/schedule/create', [TutorScheduleController::class, "store"]);
     Route::put('/tutor/schedule/update', [TutorScheduleController::class, 'update']);
     Route::delete('/tutor/schedule/delete', [TutorScheduleController::class, 'destroy']);

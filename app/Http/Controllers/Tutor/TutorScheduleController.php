@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tutor;
 use Illuminate\Http\Request;
 use App\Models\TutorSchedule;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Traits\StandardizedResponse;
 
@@ -16,10 +17,14 @@ class TutorScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($tutor_id)
     {
         try {
-            $tutor_schedule = TutorSchedule::find($request['id']);
+            $tutor_schedule = DB::table('tutor_schedules')
+                ->rightJoin('days', 'tutor_schedules.day_id', '=', 'days.id')
+                ->select('tutor_schedules.*', 'days.day_name')
+                ->orderBy('days.id')
+                ->get();
 
             return $this->successResponse($tutor_schedule, Response::HTTP_OK);
         } catch (\Throwable $th) {
