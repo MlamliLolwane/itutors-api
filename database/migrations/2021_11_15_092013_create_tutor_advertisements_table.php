@@ -16,7 +16,7 @@ class CreateTutorAdvertisementsTable extends Migration
         Schema::create('tutor_advertisements', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('content');
+            $table->longText('content');
             $table->integer('price');
             $table->integer('max_participants')->default(1);
             $table->integer('duration');

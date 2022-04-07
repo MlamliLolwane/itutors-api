@@ -20,8 +20,8 @@ class TutorScheduleController extends Controller
     public function index($tutor_id)
     {
         try {
-            $tutor_schedule = DB::table('tutor_schedules')
-                ->rightJoin('days', 'tutor_schedules.day_id', '=', 'days.id')
+            $tutor_schedule = DB::table('days')
+                ->leftJoin('tutor_schedules', 'days.id', '=', 'tutor_schedules.day_id')
                 ->select('tutor_schedules.*', 'days.day_name')
                 ->orderBy('days.id')
                 ->get();
@@ -64,26 +64,26 @@ class TutorScheduleController extends Controller
      * @param  \App\Models\TutorSchedule  $tutorSchedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         /**
          * Soft delete the previous schedule details and create a new one for the tutor to prevent
          * data inaccuracy issues.
          */
         //Find the schedule with it's id
-        $tutor_schedule = TutorSchedule::find($request['id']);
-
-        //Delete the schedule
-        $tutor_schedule->delete();
+        //$tutor_schedule = TutorSchedule::find($request['id']);
+        $updated_schedule = $request->validate([
+            'schedule' => 'required'
+        ]);
 
         /**
          * Create a new schedule for the same day the tutor specified.
          */
-        $tutor_schedule = TutorSchedule::create([
-            'tutor_id' => $request['tutor_id'],
-            'day_id' => $request['day_id'],
-            'schedule' => $request['schedule']
-        ]);
+        $tutor_schedule = TutorSchedule::where('id', $id)->first();
+
+        $tutor_schedule->fill($updated_schedule);
+
+        $tutor_schedule->save();
 
         return $this->successResponse($tutor_schedule, Response::HTTP_CREATED);
     }

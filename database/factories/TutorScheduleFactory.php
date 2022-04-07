@@ -24,7 +24,7 @@ class TutorScheduleFactory extends Factory
         return [
             'tutor_id' => 1,
             'day_id' => 1,
-            'schedule' => '{"start_time":"10:00", "end_time":"15:00"}'
+            'schedule' => "[{\"end_time\": \"12:00\", \"start_time\": \"09:00\"}, {\"end_time\": \"17:00\", \"start_time\": \"13:00\"}]"
         ];
     }
 }
