@@ -20,7 +20,6 @@ class CreateTutorSchedulesTable extends Migration
             $table->json('schedule');
             $table->foreign('tutor_id')->references('tutor_id')->on('tutor_profiles');
             $table->foreign('day_id')->references('id')->on('days');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

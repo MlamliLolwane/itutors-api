@@ -128,12 +128,11 @@ class TutorScheduleTest extends TestCase
 
         $response = $this->json(
             "DELETE",
-            "api/tutor/schedule/delete",
-            ["id" => 1],
+            "api/tutor/schedule/delete/1",
             ['ACCEPT' => 'application/json']
         );
 
-        $this->assertSoftDeleted('tutor_schedules');
+        $this->assertDeleted('tutor_schedules');
     }
 
     public function create_user_and_profile()

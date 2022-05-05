@@ -19,12 +19,16 @@ class TutorScheduleController extends Controller
      */
     public function index($tutor_id)
     {
+        /**The following query results in the left join returning only available records instead of all
+         * the records like it is supposed to when adding the tutor_id constraint.
+         */
         try {
             $tutor_schedule = DB::table('days')
                 ->leftJoin('tutor_schedules', 'days.id', '=', 'tutor_schedules.day_id')
                 ->select('tutor_schedules.*', 'days.day_name')
                 ->orderBy('days.id')
                 ->get();
+            //$tutor_schedule = TutorSchedule::all();
 
             return $this->successResponse($tutor_schedule, Response::HTTP_OK);
         } catch (\Throwable $th) {
@@ -94,13 +98,10 @@ class TutorScheduleController extends Controller
      * @param  \App\Models\TutorSchedule  $tutorSchedule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($schedule_id)
     {
         //Find the schedule with it's id
-        $tutor_schedule = TutorSchedule::find($request['id']);
-
-        //Delete the schedule
-        $tutor_schedule->delete();
+        $tutor_schedule = TutorSchedule::destroy($schedule_id);
 
         return $this->successResponse('Schedule deleted successfully', Response::HTTP_OK);
     }
